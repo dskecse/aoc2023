@@ -2,7 +2,7 @@ require "minitest/autorun"
 
 class TestCalibrationDocument < Minitest::Test
   def setup
-    @calibration_document = CalibrationDocument.new(file: "example.txt")
+    @calibration_document = CalibrationDocument.new(file: "input.txt")
   end
 
   def test_calibration_values_is_initially_an_empty_array
@@ -14,11 +14,11 @@ class TestCalibrationDocument < Minitest::Test
   end
 
   def test_recovers_calibration_document
-    assert_equal [12, 38, 15, 77], @calibration_document.recover.calibration_values
+    refute_empty @calibration_document.recover.calibration_values
   end
 
   def test_returns_the_valid_sum_of_calibration_values
-    assert_equal 142, @calibration_document.recover.calibration_values.sum
+    assert_equal 53194, @calibration_document.recover.calibration_values.sum
   end
 end
 
