@@ -31,7 +31,8 @@ class CalibrationDocument
   end
 
   def find_first_digit_as_word(line)
-    min_index, first_word = line.size, nil
+    min_index = line.index(/\d/) || line.size
+    first_word = nil
     words_to_digits.each_key do |word|
       if (index = line.index(word)) && index < min_index
         min_index = index
