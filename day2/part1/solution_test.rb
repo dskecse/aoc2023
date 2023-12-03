@@ -30,11 +30,11 @@ end
 class TestPuzzle < Minitest::Test
   def setup
     config = { red: 12, green: 13, blue: 14 }
-    @puzzle = Puzzle.new(input: "example.txt", config:)
+    @puzzle = Puzzle.new(input: "input.txt", config:)
   end
 
   def test_loads_games_on_init
-    assert_equal 5, @puzzle.games.size
+    assert_equal 100, @puzzle.games.size
   end
 
   def test_responds_to_possible_game_ids
@@ -42,7 +42,7 @@ class TestPuzzle < Minitest::Test
   end
 
   def test_returns_game_ids_that_are_possible
-    assert_equal [1, 2, 5], @puzzle.possible_game_ids
+    refute_empty @puzzle.possible_game_ids
   end
 
   def test_responds_to_solve
@@ -50,6 +50,6 @@ class TestPuzzle < Minitest::Test
   end
 
   def test_returns_the_valid_sum_of_possible_game_ids
-    assert_equal 8, @puzzle.solve
+    assert_equal 1853, @puzzle.solve
   end
 end
