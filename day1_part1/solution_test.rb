@@ -1,4 +1,5 @@
 require "minitest/autorun"
+require_relative "solution"
 
 class TestCalibrationDocument < Minitest::Test
   def setup
@@ -19,28 +20,5 @@ class TestCalibrationDocument < Minitest::Test
 
   def test_returns_the_valid_sum_of_calibration_values
     assert_equal 53194, @calibration_document.recover.calibration_values.sum
-  end
-end
-
-class CalibrationDocument
-  attr_reader :calibration_values
-
-  def initialize(file:)
-    @file = file
-    @calibration_values = []
-  end
-
-  def recover
-    contents.each_line do |line|
-      digit_chars = line.delete("^0-9").chars
-      @calibration_values << (digit_chars[0] + digit_chars[-1]).to_i
-    end
-    self
-  end
-
-  private
-
-  def contents
-    File.read(@file)
   end
 end
