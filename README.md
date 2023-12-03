@@ -4,4 +4,4 @@ This is a repo of my solutions to the [AoC 2023](https://adventofcode.com/2023) 
 
 ## Run tests
 
-    ruby day1_part1/solution_test.rb
+    ruby day1/part1/solution_test.rb
