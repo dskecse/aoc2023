@@ -17,6 +17,6 @@ class CalibrationDocument
   private
 
   def contents
-    File.read(File.join(__dir__, @file))
+    File.read(File.join(__dir__, "..", @file))
   end
 end
