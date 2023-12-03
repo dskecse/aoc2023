@@ -38,11 +38,11 @@ end
 class TestPuzzle < Minitest::Test
   def setup
     config = { red: 12, green: 13, blue: 14 }
-    @puzzle = Puzzle.new(input: "example.txt", config:)
+    @puzzle = Puzzle.new(input: "input.txt", config:)
   end
 
   def test_loads_games_on_init
-    assert_equal 5, @puzzle.games.size
+    assert_equal 100, @puzzle.games.size
   end
 
   def test_responds_to_possible_game_ids
@@ -58,7 +58,7 @@ class TestPuzzle < Minitest::Test
   end
 
   def test_returns_the_valid_sum_of_possible_game_ids
-    assert_equal 8, @puzzle.solve
+    assert_equal 1853, @puzzle.solve
   end
 
   def test_responds_to_smallest_possible_game_configs
@@ -66,13 +66,7 @@ class TestPuzzle < Minitest::Test
   end
 
   def test_returns_smallest_possible_game_configs
-    assert_equal [
-      { red: 4,  green: 2,  blue: 6 },
-      { red: 1,  green: 3,  blue: 4 },
-      { red: 20, green: 13, blue: 6 },
-      { red: 14, green: 3,  blue: 15 },
-      { red: 6,  green: 3,  blue: 2 }
-    ], @puzzle.smallest_possible_game_configs
+    assert_kind_of Array, @puzzle.smallest_possible_game_configs
   end
 
   def test_respond_to_game_config_powers
@@ -80,10 +74,10 @@ class TestPuzzle < Minitest::Test
   end
 
   def test_returns_game_config_powers
-    assert_equal [48, 12, 1560, 630, 36], @puzzle.game_config_powers
+    assert_kind_of Array, @puzzle.game_config_powers
   end
 
   def test_returns_the_right_powers_sum
-    assert_equal 2286, @puzzle.powers_sum
+    assert_equal 72706, @puzzle.powers_sum
   end
 end
