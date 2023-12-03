@@ -1,7 +1,9 @@
 Game = Data.define(:id, :subsets) do
   def possible?(config)
     subsets.all? do
-      _1[0] <= config[0] && _1[1] <= config[1] && _1[2] <= config[2]
+      _1[:red] <= config[:red] &&
+      _1[:green] <= config[:green] &&
+      _1[:blue] <= config[:blue]
     end
   end
 end
@@ -11,7 +13,7 @@ class Puzzle
 
   def initialize(input:, config:)
     @input = input
-    @config = config # [r, g, b]
+    @config = config
     @games = load_games
   end
 
@@ -25,9 +27,6 @@ class Puzzle
 
   private
 
-  CUBE_COLOR_TO_POSITION = %w[red green blue].zip(0..2).to_h
-  private_constant :CUBE_COLOR_TO_POSITION
-
   def contents
     File.read(File.join(__dir__, "..", @input))
   end
@@ -40,10 +39,10 @@ class Puzzle
 
       subsets = []
       game_subsets.map { _1.split(", ") }.each do |game_subset|
-        subset = [0] * 3
+        subset = { red: 0, green: 0, blue: 0 }
         game_subset.each do |cube_info|
           num, color = cube_info.split
-          subset[CUBE_COLOR_TO_POSITION[color]] = Integer(num)
+          subset[color.to_sym] = Integer(num)
         end
         subsets.push(subset)
       end
